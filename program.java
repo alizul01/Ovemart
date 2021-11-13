@@ -152,6 +152,16 @@ public class program {
         System.out.println();
     }
 
+    public static String snack(int snack) {
+        String namaSnack[] = { "Lays", "Chips", "Popcorn", "Nescafe", "Nescafe Milo", "Chitato", "Taro" };
+        return namaSnack[snack - 1];
+    }
+
+    public static int hargaSnack(int snack) {
+        int hargaSnack[] = { 10000, 12000, 15000, 7000, 9000, 11000, 8000 };
+        return hargaSnack[snack - 1];
+    }
+
     public static void garis() {
         System.out.println("===========================================================");
     }
