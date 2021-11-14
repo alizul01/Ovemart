@@ -10,7 +10,9 @@ public class program {
 
         // Deklarasi variabel
         int n = 1, choose = 0;
-        int totalHarga = 0;
+        int totalHarga = 0, jumlahBeliMakanan = 0, jumlahBeliMinuman = 0, jumlahBeliSnack = 0;
+        
+
         // Program utama
         while (n != 0) {
             tampilan();
@@ -34,6 +36,7 @@ public class program {
                         } else {
                             System.out.println("Kamu memilih " + makanan(choose));
                             totalHarga += hargaMakanan(choose);
+                            jumlahBeliMakanan++;
                         }
                     } catch (Exception e) {
                         System.err.println("Pilihan tidak ada");
@@ -56,11 +59,59 @@ public class program {
                         } else {
                             System.out.println("Kamu memilih " + minuman(choose));
                             totalHarga += hargaMinuman(choose);
+                            jumlahBeliMinuman++;
                         }
                     } catch (Exception e) {
                         System.err.println("Pilihan tidak ada");
                     }
                 }
+            } else if (n == 3) {
+                snack();
+                System.out.println("Ketik 0 jika sudah selesai");
+                while (true) {
+                    System.out.print("Pilih snack : ");
+                    choose = sc.nextInt();
+                    try {
+                        if (choose == 0) {
+                            break;
+                        } else {
+                            System.out.println("Kamu memilih " + snack(choose));
+                            totalHarga += hargaSnack(choose);
+                            jumlahBeliSnack++;
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Pilihan tidak ada");
+                    }
+                }
+            }
+            else if (n == 4) {
+                int jumlahBeli = jumlahBeliMakanan + jumlahBeliMinuman + jumlahBeliSnack;
+
+                // Konfirmasi pembayaran lalu keluar dari program
+                System.out.print("\nApakah kamu ingin melakukan pembayaran? (y/n) : ");
+                String confirm = sc.next();
+                if (confirm.equals("y")) {
+                    System.out.println("\nTerima kasih telah berbelanja di Toko Kami");
+                    System.out.println("\nTotal pembelian saat ini : Rp" + totalHarga);
+                    System.out.println("Jumlah pembelian saat ini : " + jumlahBeli);
+                    System.out.println("Tanggal pembelian saat ini : " + dateNow);
+
+                    // Jika total harga kurang dari Rp50000, maka akan diberikan diskon
+                    if (totalHarga < 50000) {
+                        System.out.println("\nDiskon : Rp" + (totalHarga * 0.1));
+                        System.out.println("Total pembayaran : Rp" + (totalHarga - (totalHarga * 0.1)));
+                    } else {
+                        System.out.println("Total pembayaran : Rp" + totalHarga);
+                    }
+
+                    System.out.println("\nTerima kasih telah berbelanja di Toko Kami");
+                    break;
+                } else {
+                    System.out.println("\nMau Belanja Apa Lagi nih?");
+                    continue;
+                }
+                
+                // kuitansi
             }
 
         } // end while n != 0
@@ -69,8 +120,8 @@ public class program {
 
     public static void tampilan() {
         garis();
-        System.out.println("Selamat Datang di OveMart \t\t\t" + dateNow.getDayOfMonth() + "-"
-                + dateNow.getMonthValue() + "-" + dateNow.getYear());
+        System.out.println("Selamat Datang di OveMart \t\t\t" + dateNow.getDayOfMonth() + "-" + dateNow.getMonthValue()
+                + "-" + dateNow.getYear());
         garis();
         System.out.println();
 
@@ -160,6 +211,15 @@ public class program {
     public static int hargaSnack(int snack) {
         int hargaSnack[] = { 10000, 12000, 15000, 7000, 9000, 11000, 8000 };
         return hargaSnack[snack - 1];
+    }
+
+    public static void kuitansi() {
+        garis();
+        System.out.println("Kuitansi");
+        garis();
+        
+        System.out.println("A. Makanan");
+
     }
 
     public static void garis() {
